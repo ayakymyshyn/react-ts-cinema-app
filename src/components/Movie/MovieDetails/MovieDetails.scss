@@ -1,0 +1,9 @@
+.my-4, .my-3, .details-p {
+    color: #fff;
+};
+
+.details-image {
+    &img {
+        max-width: 200px !important;
+    }
+}
