@@ -5,7 +5,6 @@ import {
   BrowserRouter as Router, Route, Switch, Redirect,
 } from 'react-router-dom';
 // Components
-import Slider from './Slider/Slider';
 import MovieGrid from './Movie/MovieGrid/MovieGrid';
 import MovieDetails from './Movie/MovieDetails/MovieDetails';
 import Sector from './Booking/Sector/Sector';
@@ -13,10 +12,6 @@ import DownloadTicket from './Movie/MovieTicket/DownloadTicket';
 // Styles
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/style.css';
-import '../css/slicknav.min.css';
-import '../css/responsive.css';
-import '../css/icofont.css';
 // Other
 import { useMovies } from './hooks/useMovies';
 
@@ -37,7 +32,6 @@ const App = (): ReactElement => {
             path="/"
             render={() => (
               <>
-                <Slider movie={movies[0]} />
                 <MovieGrid movies={movies} />
               </>
             )}

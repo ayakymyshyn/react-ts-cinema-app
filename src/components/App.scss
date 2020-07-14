@@ -128,7 +128,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
+.align-center {
+  text-align: center;
+}
 .main-app {
   position: relative;
   min-height: 100vh;
