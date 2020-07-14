@@ -28,7 +28,8 @@ export const GET_SINGLE_MOVIE = 'GET_SINGLE_MOVIE';
 type GetSingleMovie = {
   type: typeof GET_SINGLE_MOVIE;
   movie: Movie,
-  movieLoaded: boolean
+  movieLoaded: boolean,
+  id: string,
 };
 
 export const REMOVE_SEAT = 'REMOVE_SEAT';

@@ -17,7 +17,6 @@ type ReturnType = {
 
 export const useMovies = (): ReturnType => {
   const dispatch = useDispatch();
-  const fetchMovies = () => dispatch(getMovies());
   const {
     movies, isOk, selectedSeats, movie, loaded,
   } = useSelector((state: AppState) => ({
@@ -27,6 +26,7 @@ export const useMovies = (): ReturnType => {
     movie: state.moviesReducer.movie,
     loaded: state.moviesReducer.loaded,
   }));
+  const fetchMovies = () => dispatch(getMovies(movies, loaded));
 
   useEffect(() => {
     fetchMovies();

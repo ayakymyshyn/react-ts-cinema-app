@@ -1,20 +1,10 @@
 // Types
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
-import { MoviesAction, MoviesState } from '../../types/reduxTypes';
+import { MoviesAction } from '../../types/reduxTypes';
+import { Movie } from '../../types/movieTypes';
 
-export type AppThunk = ThunkAction<void, MoviesState, null, Action<MoviesAction>>;
-
-export const getSingleMovie = (match: string): AppThunk => {
-  let movieLoaded = false;
-  return async (dispatch: Dispatch<MoviesAction>) => {
-    const res = await fetch(`https://afternoon-woodland-86059.herokuapp.com/movies/${match}`);
-    const movie = await res.json();
-    movieLoaded = true;
-    return dispatch({
-      type: 'GET_SINGLE_MOVIE',
-      movie,
-      movieLoaded,
-    });
-  };
-};
+export const getSingleMovie = (id: string, movie: Movie, movieLoaded: boolean): MoviesAction => ({
+  type: 'GET_SINGLE_MOVIE',
+  movie,
+  movieLoaded,
+  id,
+});

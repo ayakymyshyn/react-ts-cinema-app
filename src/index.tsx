@@ -4,16 +4,21 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import { rootReducer } from './redux/reducers/rootReducer';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
+// Sagas
+import { rootSaga } from './sagas/rootSaga';
 
-const middleware = [thunk];
+const sagaMiddleware = createSagaMiddleware();
+const middleware = [sagaMiddleware];
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(...middleware)),
 );
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <React.StrictMode>

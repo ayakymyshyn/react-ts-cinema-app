@@ -15,14 +15,13 @@ type CallBack = (flag: boolean) => void;
 
 export const useGetSingleFilm = (id: string, cb: CallBack): UseGetSingleFilm => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getSingleMovie(id));
-    return () => cb && cb(false);
-  }, [dispatch]);
-
   const film = useSelector((state: AppState) => state.moviesReducer.movie);
   const movieLoaded = useSelector((state: AppState) => state.moviesReducer.movieLoaded);
+
+  useEffect(() => {
+    dispatch(getSingleMovie(id, film, movieLoaded));
+    return () => cb && cb(false);
+  }, [dispatch]);
 
   const movie = film;
 
