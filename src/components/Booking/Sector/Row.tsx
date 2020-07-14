@@ -27,7 +27,7 @@ const Row = ({
   price,
   stringDate,
 }: {
-  seats: Seat[],
+  seats: Array<Seat>,
   date: number,
   rowNum: number,
   price: number,
@@ -43,14 +43,16 @@ const Row = ({
           if (!seat.booked && e.target instanceof HTMLImageElement) {
             e.target.classList.toggle('selected');
           }
-          return !seat.booked && !selectedSeats.seatNum && !found ? setChosenSeats({
+          return !seat.booked && !found ? setChosenSeats([{
             row: rowNum,
             seatNum: seat._id,
+            _id: seat._id,
+            booked: seat.booked,
             seat: i,
             date,
             price,
             stringDate,
-          }) : deleteSeat(seat._id);
+          }]) : deleteSeat(seat._id);
         };
         return (
           <>

@@ -48,7 +48,6 @@ export const SET_SEATS = 'SET_SEATS';
 type SetSeats = {
   type: typeof SET_SEATS;
   seats: Array<Seat>,
-  row: Row
 };
 
 export type MoviesAction =
