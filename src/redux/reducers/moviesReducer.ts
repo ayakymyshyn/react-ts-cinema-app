@@ -11,7 +11,7 @@ import {
 } from '../../types/reduxTypes';
 
 // State
-const moviesState: MoviesState = {
+export const moviesState: MoviesState = {
   movies: [],
   movie: {
     _id: '',

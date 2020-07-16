@@ -406,9 +406,7 @@ li.date-list-item {
     display: none !important; 
   }
 }
-
 .spinner { 
-
   position: fixed;
   z-index: 999;
   height: 15em;

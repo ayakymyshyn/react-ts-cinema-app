@@ -17,7 +17,7 @@ type PropTypes = {
 };
 
 const MovieCard = ({ movie, stringDate = '' }: PropTypes): ReactElement => (
-  <div className="movie-card">
+  <div className="movie-card" data-test="movie-card">
     <MovieCardHeader background={movie.image} />
     <div className="movie-content">
       <MovieContentHeader id={movie._id} title={movie.title} />

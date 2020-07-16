@@ -29,8 +29,11 @@ export const useMovies = (): ReturnType => {
   const fetchMovies = () => dispatch(getMovies(movies, loaded));
 
   useEffect(() => {
+    console.log('mounting...');
     fetchMovies();
   }, [dispatch]);
+
+  console.log(movies);
 
   return {
     movies,

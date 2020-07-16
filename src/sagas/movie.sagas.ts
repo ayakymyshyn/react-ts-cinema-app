@@ -13,7 +13,7 @@ import { fetchMovies } from '../api/fetchMovies';
 import { fetchSingleMovie } from '../api/fetchSingleMovie';
 
 // Workers
-function* loadMovies() {
+export function* loadMovies() {
   let loaded = false;
   const movies = yield call(fetchMovies);
   if (movies) {
@@ -22,7 +22,7 @@ function* loadMovies() {
   yield put(getMovies(movies, loaded));
 }
 
-function* loadSingleMovie(action: AnyAction) {
+export function* loadSingleMovie(action: AnyAction) {
   let loaded = false;
   const { id } = action;
   const movie = yield call(fetchSingleMovie, id);
