@@ -19,8 +19,6 @@ const App = (): ReactElement => {
   const {
     movies,
     isOk,
-    selectedSeats,
-    movie,
     loaded,
   } = useMovies();
   return loaded ? (
@@ -42,11 +40,7 @@ const App = (): ReactElement => {
           <Route path="/seats" component={Sector} />
           <Route
             render={() => (
-              <DownloadTicket
-                title={movie.title}
-                movieId={movie._id}
-                selectedSeats={selectedSeats}
-              />
+              <DownloadTicket />
             )}
           />
           <Route path="*" render={() => <h2>404</h2>} />

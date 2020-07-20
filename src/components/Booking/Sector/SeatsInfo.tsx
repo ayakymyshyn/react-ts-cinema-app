@@ -15,6 +15,7 @@ type PropTypes = {
 const SeatsInfo = ({ bookFunc, url, data }: PropTypes): ReactElement => {
   let total = 0;
   const info = useSelector((state: AppState) => state.moviesReducer.selectedSeats);
+  const movie = useSelector((state: AppState) => state.moviesReducer.movie);
   // Separated logic
   const ticketInfoJSX = (info
     && info.map((el) => {
@@ -42,7 +43,11 @@ const SeatsInfo = ({ bookFunc, url, data }: PropTypes): ReactElement => {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={() => bookFunc(url, data)}
+              onClick={() => {
+                bookFunc(url, data);
+                localStorage.removeItem('bookedMovie');
+                localStorage.setItem('bookedMovie', JSON.stringify({ movie: { ...movie }, seats: [...info] }));
+              }}
             >
               Book ticket
             </button>

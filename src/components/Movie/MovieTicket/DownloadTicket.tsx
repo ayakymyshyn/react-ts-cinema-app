@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/forbid-prop-types */
 // Core
 import React, { ReactElement } from 'react';
@@ -6,26 +7,31 @@ import { Link } from 'react-router-dom';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 // Components
 import MovieTicket from './MovieTicket';
-// Types
-import { Seat } from '../../../types/movieTypes';
 
-type PropTypes = {
-  title: string,
-  selectedSeats: Seat[],
-  movieId: string
+const DownloadTicket = (): ReactElement => {
+  const movieData = JSON.parse(localStorage.getItem('bookedMovie') || '{}');
+  return (
+    <>
+      <MovieTicket
+        title={movieData.title}
+        selectedSeats={movieData.seats}
+        movieId={movieData._id}
+      />
+      <PDFDownloadLink
+        document={(
+          <MovieTicket
+            title={movieData.title}
+            selectedSeats={movieData.seats}
+            movieId={movieData._id}
+          />
+)}
+        fileName="ticket.pdf"
+      >
+        <div className="theme-btn">Download Ticket Info in PDF</div>
+        <Link to="/" className="theme-btn">Back to main page</Link>
+      </PDFDownloadLink>
+    </>
+  );
 };
-
-const DownloadTicket = ({ title, selectedSeats, movieId }: PropTypes): ReactElement => (
-  <>
-    <MovieTicket title={title} selectedSeats={selectedSeats} />
-    <PDFDownloadLink
-      document={<MovieTicket title={title} selectedSeats={selectedSeats} movieId={movieId} />}
-      fileName="ticket.pdf"
-    >
-      <div className="theme-btn">Download Ticket Info in PDF</div>
-      <Link to="/" className="theme-btn">Back to main page</Link>
-    </PDFDownloadLink>
-  </>
-);
 
 export default DownloadTicket;

@@ -24,28 +24,53 @@ type PropTypes = {
 // Create styles
 const styles = StyleSheet.create({
   page: {
-    flexDirection: 'row',
+    display: 'flex',
+    flexDirection: 'column',
     backgroundColor: '#E4E4E4',
+    margin: '25px',
   },
   section: {
     margin: 10,
     padding: 10,
-    flexGrow: 1,
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  title: {
+    fontSize: '34px',
+    fontWeight: 'bold',
+    top: '20px',
+  },
+  date: {
+    fontSize: '14px',
+  },
+  seats: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  movieid: {
+    fontSize: '10px',
+    textTransform: 'uppercase',
   },
 });
 
 const MovieTicket = ({ title, selectedSeats, movieId = '' }: PropTypes): ReactElement => (
   <Document>
-    <Page size="A4" style={styles.page}>
+    <Page size="LETTER" style={styles.page} orientation="landscape">
       <View style={styles.section}>
-        <Text>{title}</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.movieid}>
+          {movieId}
+        </Text>
       </View>
       <View style={styles.section}>
-        <Text>Date: </Text>
-        <Text>
-          {selectedSeats && selectedSeats[0].stringDate}
-        </Text>
-        {selectedSeats
+        <View>
+          <Text style={styles.date}>Date: </Text>
+          <Text style={styles.date}>
+            {selectedSeats && selectedSeats[0].stringDate}
+          </Text>
+        </View>
+        <View style={styles.seats}>
+          {selectedSeats
             && selectedSeats.map((s) => {
               const { row, seat } = s;
               const r = row || 0;
@@ -56,17 +81,10 @@ const MovieTicket = ({ title, selectedSeats, movieId = '' }: PropTypes): ReactEl
                   {r + 1}
                   <Text>, Seat:</Text>
                   {st + 1}
-                  <Text>
-                    <Text>SeatID:</Text>
-                    {s.seatNum}
-                  </Text>
-                  <Text>
-                    <Text>MovieID:</Text>
-                    {movieId}
-                  </Text>
                 </Text>
               );
             })}
+        </View>
       </View>
     </Page>
   </Document>

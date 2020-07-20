@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 // Core
 import React, { ReactElement } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Sector from '../../Booking/Sector/Sector';
 import { displayDateCorrectly } from '../../../utils/displayDateCorrectly';
 import { displayFilmTime } from '../../../utils/displayFilmTime';
@@ -33,25 +33,25 @@ const MovieDetails = ({ match }: Props): ReactElement => {
   const { movie, movieLoaded } = useGetSingleFilm(match.params.movieId, changeBookStatus);
   // Separated JSX logic
   const dateNavigationJSX = movie.dates
-  && (movie.dates.map((date, i) => (
-    <li
-      key={date._id}
-      className="nav-item date-list-item"
-      onClick={() => {
-        setSelectedDate({ ...date, idx: i });
-        cleanSeats();
-      }}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter') {
+    ? (movie.dates.map((date, i) => (
+      <li
+        key={date._id}
+        className="nav-item date-list-item"
+        onClick={() => {
           setSelectedDate({ ...date, idx: i });
           cleanSeats();
-        }
-      }}
-    >
-      {`${displayDateCorrectly(date.date)} - 
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            setSelectedDate({ ...date, idx: i });
+            cleanSeats();
+          }
+        }}
+      >
+        {`${displayDateCorrectly(date.date)} - 
       ${displayFilmTime(date.date)}`}
-    </li>
-  )));
+      </li>
+    ))) : <Redirect to="/" />;
 
   const selectedDateJSX = (selectedDate.date
     ? `Selected date: ${displayDateCorrectly(
